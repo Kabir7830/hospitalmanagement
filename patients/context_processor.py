@@ -1,7 +1,7 @@
 from . models import *
 
 
-def GlobalData():
+def GlobalData(request):
     
     doctors = Doctors.objects.all()
     

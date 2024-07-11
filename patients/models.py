@@ -11,7 +11,10 @@ class users(models.Model):
 
 class Doctors(models.Model):
     name = models.CharField(max_length=300)
+    department = models.CharField(max_length=255)
     specialization = models.CharField(max_length=300)
+    contact_number = models.CharField(max_length=13)
+    email = models.EmailField(null=True,blank=True)
 
 
 

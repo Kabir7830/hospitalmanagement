@@ -7,12 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/doctors/add" method="post">
+    <form action="{% url 'add-doctor' %}" method="post">
         {%csrf_token%} 
         <label for="">Doctor name</label>
         <input type="text" name="doctor_name">
         <label for="">Specialization</label>
         <textarea type="text" name="specialization"></textarea>
+        <label for="">Department</label>
+        <textarea type="text" name="department"></textarea>
+        <label for="">Email</label>
+        <textarea type="text" name="email"></textarea>
+        <label for="">Contact</label>
+        <textarea type="text" name="contact_number"></textarea>
         <button type="submit">Add</button>
     </form>
 </body>

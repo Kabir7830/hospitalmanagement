@@ -63,6 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "patients.context_processor.GlobalData",
             ],
         },
     },
@@ -75,18 +76,25 @@ WSGI_APPLICATION = 'Project.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
- 'default': {
-'ENGINE': 'django.db.backends.mysql',
-'NAME': 'hospitalsys',
-'USER': 'root',
-'PASSWORD': '',
-'HOST': 'localhost',
-'PORT': '3306',
-'OPTIONS': {
-'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+    'default':{
+        'ENGINE':'django.db.backends.sqlite3',
+        'NAME':BASE_DIR / 'dbsqlite3',
+    }
 }
-}
-}
+
+# DATABASES = {
+#  'default': {
+# 'ENGINE': 'django.db.backends.mysql',
+# 'NAME': 'hospitalsys',
+# 'USER': 'root',
+# 'PASSWORD': '',
+# 'HOST': 'localhost',
+# 'PORT': '3306',
+# 'OPTIONS': {
+# 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+# }
+# }
+# }
 
 
 # Password validation

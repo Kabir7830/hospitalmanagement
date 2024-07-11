@@ -1,7 +1,7 @@
 from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import render,get_object_or_404,redirect
-
+from django.contrib import messages
 from .models import users
 from  .models import *
 from django.contrib.auth.models import User
@@ -12,7 +12,6 @@ from django.db.models import Q
 
 
 def homepage(request):
-  doctors = Doctors.objects.all()
   return render(request,'index.html',{"doctors":doctors})
 
 def dashboard(request):
@@ -90,9 +89,9 @@ def loginHandler(request):
     if user is not None:
       login(request,user)
       # login()
+      messages.success(request,"Logged in")
       return redirect("/")
-    
-    return render(request,"login.html")
+    return render(request,"login.html",{"error_message":"Invalid Username or password"})
   return render(request,"login.html")
 
 
@@ -152,12 +151,12 @@ def user_appointments(request):
   if request.user.is_authenticated:
     appointment = Book_Appointment.objects.filter(email = request.user.email)
     return render(request,"user_appointmentss.html",{"appointment":appointment.first()})
+  return redirect('login')
 
 
 
 def booking(request):
-  doctors = Doctors.objects.all()
-  return render(request,"booking.html",{"doctors":doctors})
+  return render(request,"booking.html")
 
 
 def specialities(request):
@@ -177,12 +176,35 @@ def book_appointment_doc(request):
 def add_doctor(request):
   if request.method == "POST":
     doctor = Doctors.objects.create(
-    name = request.POST['doctor_name'],
-    specialization = request.POST['specialization'],
+    name = request.POST.get('doctor_name'),
+    specialization = request.POST.get('specialization'),
+    department = request.POST.get('department'),
+    email = request.POST.get('email',"None"),
+    contact_number = request.POST.get('contact_number')
     )    
     return redirect(request.META.get("HTTP_REFERER"))
   
   return render(request,"add_doctor.html")
+
+
+def edit_doctor(request,doc_id):
+  doctor = Doctors.objects.filter(id = doc_id)
+  if request.method == "POST":
+    try:
+      doctor.update(
+      name = request.POST.get('doctor_name'),
+      specialization = request.POST.get('specialization'),
+      department = request.POST.get('department'),
+      email = request.POST.get('email',"None"),
+      contact_number = request.POST.get('contact_number')
+      )
+      messages.success(request,"Updated")
+      return redirect(request.META.get("HTTP_REFERER"))
+    except Exception as e:
+      print("exception in edit-doctor function",e)
+      return redirect(request.META.get("HTTP_REFERER"))
+  
+  return render(request,"edit_doctor.html",{"doctor":doctor.first()})
 
 
 def get_all_doctors_admin(request):

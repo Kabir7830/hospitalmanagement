@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Doctor</title>
+</head>
+<body>
+    <form method="post">
+        {%csrf_token%} 
+        <label for="">Doctor name</label>
+        <input type="text" name="doctor_name" value="{{doctor.name}}" required>
+        <label for="">Specialization</label>
+        <textarea type="text" name="specialization" required>{{doctor.specialization}}</textarea>
+        <label for="">Department</label>
+        <textarea type="text" name="department" required>{{doctor.department}}</textarea>
+        <label for="">Email</label>
+        <textarea type="text" name="email" required>{{doctor.email}}</textarea>
+        <label for="">Contact</label>
+        <textarea type="text" name="contact_number" required>{{doctor.contact_number}}</textarea>
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>
