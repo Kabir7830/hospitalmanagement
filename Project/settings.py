@@ -25,7 +25,26 @@ SECRET_KEY = 'django-insecure-9iwg130r-o$5&$e7p*$)@_*@7ibsj+l7^&oqfyzriu1nnps%x)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*",
+                 "hospitalmanagement01.azurewebsites.net",
+                 "www.hospitalmanagement01.azurewebsites.net",
+                 "https://www.hospitalmanagement01.azurewebsites.net",
+                 "http://www.hospitalmanagement01.azurewebsites.net",
+                 "https://hospitalmanagement01.azurewebsites.net",
+                 "http://hospitalmanagement01.azurewebsites.net",
+                 "localhost",]
+
+CSRF_TRUSTED_ORIGINS = [
+                    "hospitalmanagement01.azurewebsites.net",
+                    "www.hospitalmanagement01.azurewebsites.net",
+                    "https://www.hospitalmanagement01.azurewebsites.net",
+                    "http://www.hospitalmanagement01.azurewebsites.net",
+                    "https://hospitalmanagement01.azurewebsites.net",
+                    "http://hospitalmanagement01.azurewebsites.net",
+                    "localhost",]
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 
 # Application definition
